@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <AdminOrgName>xperiencecommunity</AdminOrgName>
+        <RootNamespace>XperienceCommunity.Locator</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <AssemblyAttribute Include="CMS.AssemblyDiscoverableAttribute" />
+        <InternalsVisibleTo Include="$(AssemblyName).Tests" />
+
+        <Compile Remove="Client\node_modules\**" />
+        <EmbeddedResource Remove="Client\node_modules\**" />
+        <None Remove="Client\node_modules\**" />
+
+        <!-- Requires that npm run build or npm run build:dev was executed _before_ the .NET build -->
+        <AdminClientPath Include="Client\dist\**" Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+            <ProjectName>web-locator</ProjectName>
+        </AdminClientPath>
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Compile Remove="Client\node_modules\**"/>
+        <EmbeddedResource Remove="Client\node_modules\**"/>
+        <None Remove="Client\node_modules\**"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+        <PackageVersion Include="kentico.xperience.admin" />
+        <PackageVersion Include="kentico.xperience.azurestorage" />
+        <PackageVersion Include="kentico.xperience.imageprocessing" />
+        <PackageVersion Include="kentico.xperience.webapp" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Kentico.Xperience.Admin" />
+      <PackageReference Include="Scrutor" />
+    </ItemGroup>
+
+
+    <Target Name="NpmInstall" BeforeTargets="NpmBuildClient" Condition=" '$(Configuration)|$(Platform)' != 'Debug|AnyCPU' ">
+        <Exec Command="npm ci --no-audit --no-fund" WorkingDirectory="$(MSBuildProjectDirectory)\Client" />
+    </Target>
+    <Target Name="NpmBuildClient" BeforeTargets="BeforeBuild" Condition=" '$(Configuration)|$(Platform)' != 'Debug|AnyCPU' ">
+        <Exec Command="npm run build" WorkingDirectory="$(MSBuildProjectDirectory)\Client" />
+
+        <ItemGroup>
+            <AdminClientPath Include="Client\dist\**">
+                <ProjectName>web-locator</ProjectName>
+            </AdminClientPath>
+        </ItemGroup>
+    </Target>
+    
+</Project>
