@@ -1,0 +1,8 @@
+<Project>
+
+    <!-- Don't copy npm files -->
+    <ItemGroup>
+        <Content Update="package-lock.json" CopyToPublishDirectory="Never" />
+        <Content Update="package.json" CopyToPublishDirectory="Never" />
+    </ItemGroup>
+</Project>

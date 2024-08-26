@@ -1,0 +1,16 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageVersionOverrideEnabled>false</CentralPackageVersionOverrideEnabled>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="kentico.xperience.admin" Version="29.3.1" />
+    <PackageVersion Include="Kentico.Xperience.Admin" Version="29.3.1" />
+    <PackageVersion Include="kentico.xperience.azurestorage" Version="29.3.1" />
+    <PackageVersion Include="kentico.xperience.imageprocessing" Version="29.3.1" />
+    <PackageVersion Include="kentico.xperience.webapp" Version="29.3.1" />
+    <PackageVersion Include="Scrutor" Version="4.2.2" />
+  </ItemGroup>
+</Project>
